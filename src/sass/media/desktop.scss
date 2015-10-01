@@ -1,0 +1,9 @@
+@media only screen and (min-width: $desktop-breakpoint) {
+    /* Style adjustments for viewports that meet the condition */
+    .show-on-desktop-only {
+        display: initial;
+    }
+    .hide-on-desktop-only {
+        display: none;
+    }
+}

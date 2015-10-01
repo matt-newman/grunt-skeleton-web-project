@@ -1,0 +1,12 @@
+@media only screen and (max-width: $mobile-portrait-breakpoint) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media only screen and (max-width: $mobile-landscape-breakpoint) {
+    .show-on-mobile-only {
+        display: initial;
+    }
+    .hide-on-mobile-only {
+        display: none;
+    }
+}

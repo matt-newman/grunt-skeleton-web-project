@@ -1,0 +1,13 @@
+@media only screen and (min-width: $tablet-breakpoint) and (max-width: $desktop-breakpoint) {
+    /* Style adjustments for viewports that meet the condition */
+    .show-on-tablet-only {
+        display: initial;
+    }
+    .hide-on-tablet-only {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: $tablet-breakpoint) {
+    /* Style adjustments for viewports of tablet size and up */
+}
