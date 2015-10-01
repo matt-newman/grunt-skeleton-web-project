@@ -22,8 +22,9 @@ Run:
 
 That'll run the grunt default task which currently is set to prep everything for release, and spool up a server, I might change it later to just run watch so that it's ready to start working on.
 
-//TODO: add js testing framework (jasmine)
-//TODO: add grunt-contrib-newer
-//TODO: change default grunt task to 'watch'
-//TODO: source-mapping chain for sass->css->min.css
-//TODO: cache-buster mechanism
+//TODOs:
+* add js testing framework (jasmine)
+* add grunt-contrib-newer
+* change default grunt task to 'watch'
+* source-mapping chain for sass->css->min.css
+* cache-buster mechanism
