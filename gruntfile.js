@@ -51,6 +51,15 @@ module.exports = function(grunt) {
                 }
             }
         },
+        jasmine: {
+            main: {
+                src: 'src/js/*.js',
+                options: {
+                    keepRunner: true,
+                    specs: 'test/*.spec.js'
+                }
+            }
+        },
         sass: {
             dest: { // Target
                 options: { // Target options
@@ -124,6 +133,7 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-sass');    
     grunt.loadNpmTasks('grunt-postcss');
     grunt.loadNpmTasks('grunt-contrib-cssmin');

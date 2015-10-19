@@ -5,4 +5,8 @@ _mn.domReady = function() {
     
 };
 
+_mn.testing = function() {
+    return 'test';
+};
+
 window.addEventListener('DOMContentLoaded', _mn.domReady, false);
