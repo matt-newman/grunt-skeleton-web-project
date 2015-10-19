@@ -4,8 +4,8 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         watch: {
             scripts: {
-                files: ['src/js/*.js'],
-                tasks: ['jshint'],
+                files: ['src/js/*.js', 'test/*.spec.js'],
+                tasks: ['jshint', 'jasmine'],
                 options: {
                     spawn: false,
                 }
@@ -142,6 +142,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('default', ['copy', 'jshint', 'sass', 'uglify', 'postcss', 'cssmin', 'imagemin']);
+    grunt.registerTask('default', ['copy', 'jshint', 'jasmine', 'sass', 'uglify', 'postcss', 'cssmin', 'imagemin']);
     grunt.registerTask('server', ['default', 'connect:server:keepalive']);
 };
