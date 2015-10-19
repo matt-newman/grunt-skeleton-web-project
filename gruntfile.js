@@ -12,23 +12,31 @@ module.exports = function(grunt) {
             },
             sass: {
                 files: 'src/sass/**',
-                tasks: ['sass', 'cssmin'],
+                tasks: ['sass', 'postcss', 'cssmin'],
                 options: {
                     livereload: true,
                     spawn: false,
                 }
             },
+            images: {
+                files: ['src/img/*.{png,jpg,gif}'],
+                tasks: ['imagemin'],
+                options: {
+                    livereload: true,
+                    spawn: false
+                }
+            }
         },
         copy: {
             main: {
                 files: [
-                    // copies js lib files to dest folder
+                    // copies js lib files to target folder
                     {
                         expand: true,
-                        cwd: 'src/js/lib',
-                        src: ['*.js'],
-                        dest: 'dest/js/lib',
-                        filter: 'isFile'
+                        cwd: 'src',
+                        src: ['js/lib/*.js'],
+                        dest: 'target',
+                        timestamp: true
                     }
                 ],
             },
@@ -49,7 +57,7 @@ module.exports = function(grunt) {
                     style: 'expanded'
                 },
                 files: {
-                    'src/css/main.css': 'src/sass/build.scss' // 'destination': 'source'
+                    'src/css/main.css': 'src/sass/build.scss' // 'targetination': 'source'
                 }
             }
         },
@@ -61,17 +69,30 @@ module.exports = function(grunt) {
             },
             mainjs: {
                 options: {
-                    sourceMap: 'dest/main.min.js.map'
+                    sourceMap: 'target/main.min.js.map'
                 },
                 files: {
-                    'dest/js/main.min.js': ['src/js/main.js'],
+                    'target/js/main.min.js': ['src/js/main.js'],
                 }
+            }
+        },
+        postcss: {
+            options: {
+                map: true,
+                processors: [
+                    require('autoprefixer')({
+                        browsers: ['last 2 versions']
+                    })
+                ]
+            },
+            dist: {
+                src: 'src/css/main.css'
             }
         },
         cssmin: {
             compress: {
                 files: {
-                    "dest/css/main.min.css": ['src/css/lib/normalize.css', 'src/css/main.css']
+                    "target/css/main.min.css": ['src/css/lib/normalize.css', 'src/css/main.css']
                 }
             }
         },
@@ -81,7 +102,7 @@ module.exports = function(grunt) {
                     expand: true, // Enable dynamic expansion
                     cwd: 'src/img/', // Src matches are relative to this path
                     src: ['*.{png,jpg,gif}'], // Actual patterns to match
-                    dest: 'dest/img/' // Destination path prefix
+                    dest: 'target/img/' // destination path prefix
                 }]
             }
         },
@@ -103,13 +124,14 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-sass');    
+    grunt.loadNpmTasks('grunt-postcss');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');    
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('default', ['copy', 'jshint', 'sass', 'uglify', 'cssmin', 'imagemin']);
+    grunt.registerTask('default', ['copy', 'jshint', 'sass', 'uglify', 'postcss', 'cssmin', 'imagemin']);
     grunt.registerTask('server', ['default', 'connect:server:keepalive']);
 };
